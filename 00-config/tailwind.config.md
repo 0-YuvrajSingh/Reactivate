@@ -16,4 +16,5 @@ export default defineConfig({
   ]
 });
 
-5.@import "tailwindcss";
+5. // Import tailwind in index.css
+@import "tailwindcss";
