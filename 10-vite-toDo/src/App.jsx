@@ -9,9 +9,11 @@ function App() {
     setTodos((prev) => [{ id: Date.now(), ...todo }, ...prev]);
   };
 
-  const updateToDo = (id, todo) => {
+  const updateToDo = (id, newText) => {
     setTodos((prev) =>
-      prev.map((prevToDo) => (prevToDo.id === id ? todo : prevToDo))
+      prev.map((prevToDo) =>
+        prevToDo.id === id ? { ...prevToDo, todo: newText } : prevToDo
+      )
     );
   };
 
@@ -34,7 +36,7 @@ function App() {
     if (todos && todos.length) {
       setTodos(todos);
     }
-  });
+  }, []);
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
@@ -49,15 +51,12 @@ function App() {
           <h1 className="text-2xl font-bold text-center mb-8 mt-2">
             Manage Your Todos
           </h1>
-          <div className="mb-4">{/* Todo form goes here */}
+          <div className="mb-4">
             <TodoForm />
           </div>
           <div className="flex flex-wrap gap-y-3">
-            {/*Loop and Add TodoItem here */}
             {todos.map((todo) => (
-              <div key={todo.id}
-              className="w-full"
-              >
+              <div key={todo.id} className="w-full">
                 <TodoItem todo={todo} />
               </div>
             ))}
