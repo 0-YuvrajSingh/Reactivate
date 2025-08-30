@@ -5,6 +5,14 @@ function TodoForm() {
     
     const [todo, setTodo] = useState("");
     const {addToDo} = useTodo();
+
+    const  add = (event) => {
+        event.preventDefault();
+
+        if(!todo) return;
+
+        addToDo({id:Date.now(), todo: todo, completed: false});
+    }
  
     return (
         <form  className="flex">
