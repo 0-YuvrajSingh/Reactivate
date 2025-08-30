@@ -1,31 +1,36 @@
-import React, { useState } from 'react'
-import { useTodo } from '../context';
+import React, { useState } from "react";
+import { useTodo } from "../context";
 
 function TodoForm() {
-    
-    const [todo, setTodo] = useState("");
-    const {addToDo} = useTodo();
+  const [todo, setTodo] = useState("");
+  const { addToDo } = useTodo();
 
-    const  add = (event) => {
-        event.preventDefault();
+  const add = (event) => {
+    event.preventDefault();
 
-        if(!todo) return;
+    if (!todo) return;
 
-        addToDo({id:Date.now(), todo: todo, completed: false});
-    }
- 
-    return (
-        <form  className="flex">
-            <input
-                type="text"
-                placeholder="Write Todo..."
-                className="w-full border border-black/10 rounded-l-lg px-3 outline-none duration-150 bg-white/20 py-1.5"
-            />
-            <button type="submit" className="rounded-r-lg px-3 py-1 bg-green-600 text-white shrink-0">
-                Add
-            </button>
-        </form>
-    );
+    addToDo({ id: Date.now(), todo: todo, completed: false });
+    setTodo("");
+  };
+
+  return (
+    <form onSubmit={add} className="flex">
+      <input
+        type="text"
+        placeholder="Write Todo..."
+        className="w-full border border-black/10 rounded-l-lg px-3 outline-none duration-150 bg-white/20 py-1.5"
+        value={todo}
+        onChange = {(event) => setTodo(event.target.value)}
+      />
+      <button
+        type="submit"
+        className="rounded-r-lg px-3 py-1 bg-green-600 text-white shrink-0"
+      >
+        Add
+      </button>
+    </form>
+  );
 }
 
 export default TodoForm;
