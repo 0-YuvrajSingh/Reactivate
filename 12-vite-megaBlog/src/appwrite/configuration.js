@@ -115,7 +115,7 @@ export class StorageService {
         }
     }
 
-    async filePreview(fileId) {
+    filePreview(fileId) {
         try {
             return this.storage.getFilePreview(
                 config.appwriteBucketId,
@@ -128,13 +128,12 @@ export class StorageService {
 
     async downloadFile(fileId) {
         try {
-            return this.storage.downloadFile(
+            return await this.storage.downloadFile(
                 config.appwriteBucketId,
                 fileId
             )
         } catch (error) {
             throw error
-            return null;
         }
     }
 }
