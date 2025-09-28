@@ -48,7 +48,7 @@ export class StorageService {
 
     }
 
-    async updatePost(slug, {title, content, featuredImage, status, userId}) {
+    async updatePost(slug, {title, content, featuredImage, status}) {
         try {
             return await this.databases.updateDocument(
                 config.appwriteDatabaseId,
@@ -83,7 +83,7 @@ export class StorageService {
             return await this.databases.listDocuments(
                 config.appwriteDatabaseId,
                 config.appwriteCollectionId,
-                queries
+                queries,
             )
         } catch (error) {
             throw error
@@ -110,7 +110,6 @@ export class StorageService {
                 config.appwriteBucketId,
                 fileId
             )
-            return true
         } catch (error) {
             throw error
         }
@@ -124,6 +123,18 @@ export class StorageService {
             )
         } catch (error) {
             throw error
+        }
+    }
+
+    async downloadFile(fileId) {
+        try {
+            return this.storage.downloadFile(
+                config.appwriteBucketId,
+                fileId
+            )
+        } catch (error) {
+            throw error
+            return null;
         }
     }
 }
